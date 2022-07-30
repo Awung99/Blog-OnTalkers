@@ -1,0 +1,179 @@
+{% extends 'index2.html' %}
+
+{% block style %} 
+ <style>
+    .my-nav{
+      background-color:gray !important;
+    }
+ </style>
+{% endblock style %}
+
+
+{% block content %}
+<div class="container" style="margin: 220px;"></div>
+  <div id="about" class="section wb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="message-box">                        
+                    <h2>Welcome to OnTalkers</h2>
+                    <p> OnTalkers is a proffessinal blog website created by a student from Developers institute yaounde Cameroon,the founder of this amazing blog site is called Awung Jireh Atabong,based and currently living in yaounde  </p>
+        <p>The aim for this amazing blog is to give the popultion the ability to get current info or situations currently happening in our society,due to this amazing blog site bloggers are now able to feed the population with cureent news on sports,politics and economy situation</p>
+  
+                    <a href="{% url 'home' %}" class="sim-btn hvr-bounce-to-top"><span>Back To Homepage</span></a>
+                </div><!-- end messagebox -->
+            </div><!-- end col -->
+           
+            <div class="col-md-6">
+                <div class="right-box-pro wow fadeIn">
+                    <img src="uploads/about_04.jpg" alt="" class="img-fluid img-rounded">
+                </div><!-- end media -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+  </div><!-- end section -->
+  
+  <div id="services" class="section lb">
+    <div class="container">
+        <div class="section-title text-center">
+            <h3>Services</h3>
+            <p>Curently the service we our now is to give valid informations to the populations and giving bloggers the oppotunity to post valid content</p>
+        </div><!-- end title -->
+  
+        <div class="row">
+    <div class="col-md-4">
+                <div class="services-inner-box">
+        <div class="ser-icon">
+          <i class="flaticon-seo"></i>
+        </div>
+        <h2>Web Development</h2>
+        <p>We give valid infos concerning web development for those who are interested,we request valid asnd high institute like deverlopers institute</p>
+      </div>
+            </div><!-- end col -->
+            <div class="col-md-4">
+                <div class="services-inner-box">
+        <div class="ser-icon">
+          <i class="flaticon-development"></i>
+        </div>
+        <h2>Responsive Design</h2>
+        <p>we bring amazing desings done by professional web deverlopers from deverlopers instituete yaounde</p>
+      </div>
+            </div><!-- end col -->
+    <div class="col-md-4">
+                <div class="services-inner-box">
+        <div class="ser-icon">
+          <i class="flaticon-process"></i>
+        </div>
+        <h2>Creative Design</h2>
+        <p>we bring variety of good institute for those insterested in creating and knowing how to create good web designs</p>
+      </div>
+            </div><!-- end col -->
+    <div class="col-md-4">
+                <div class="services-inner-box">
+        <div class="ser-icon">
+          <i class="flaticon-discuss-issue"></i>
+        </div>
+        <h2>Support</h2>
+        <p>we support all our users  by ensuring their valid post or info reaches the exact population they desire</p>
+      </div>
+            </div><!-- end col -->
+    <div class="col-md-4">
+                <div class="services-inner-box">
+        <div class="ser-icon">
+          <i class="flaticon-idea"></i>
+        </div>
+        <h2>Web Idea</h2>
+        <p>we also help to guide novis who are interested in doing standard web development,by giving them standard and valid ideas concerning web</p>
+      </div>
+            </div><!-- end col -->
+    <div class="col-md-4">
+                <div class="services-inner-box">
+        <div class="ser-icon">
+          <i class="flaticon-idea-1"></i>
+        </div>
+        <h2>Graphic Design</h2>
+        <p>we also provide standard and top class Graphic design companies aroun our interested user location</p>
+      </div>
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+  </div><!-- end section -->
+  
+  <div id="home" class="section lb">
+  <div class="container">
+  <div class="section-title text-center">
+            <h3>More About Us</h3>
+            <p>Curentlynow we are based and highly functional in yaounde Cameroon,we have been operating for quite some time now effective from when we started and we looking for great extention in the nearest future to come.</p>
+        </div><!-- end title -->
+  
+  <div class="gallery-menu row">
+    <div class="col-md-12">
+      <div class="button-group filter-button-group text-center">
+        <button class="active" data-filter="*">All</button>
+        <button data-filter=".gal_a">Web Development</button>
+        <button data-filter=".gal_b">Creative Design</button>
+        <button data-filter=".gal_c">Graphic Design</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery-list row">
+    <div class="col-md-4 col-sm-6 gallery-grid gal_a gal_b">
+      <div class="gallery-single fix">
+        <img src=" ../../static/uploads/gallery_img-01.jpg" class="img-fluid" alt="Image">
+        <div class="img-overlay">
+          <a href="../../static/uploads/gallery_img-01.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="fa fa-picture-o"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-6 gallery-grid gal_c gal_b">
+      <div class="gallery-single fix">
+        <img src="../../static/uploads/gallery_img-02.jpg" class="img-fluid" alt="Image">
+        <div class="img-overlay">
+          <a href="../../static/uploads/gallery_img-02.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="fa fa-picture-o"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-6 gallery-grid gal_a gal_c">
+      <div class="gallery-single fix">
+        <img src="../../static/uploads/gallery_img-03.jpg" class="img-fluid" alt="Image">
+        <div class="img-overlay">
+          <a href="../../static/uploads/gallery_img-03.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="fa fa-picture-o"></i></a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4 col-sm-6 gallery-grid gal_b gal_a">
+      <div class="gallery-single fix">
+        <img src="../../static/uploads/gallery_img-04.jpg" class="img-fluid" alt="Image">
+        <div class="img-overlay">
+          <a href="../../static/uploads/gallery_img-04.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="fa fa-picture-o"></i></a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4 col-sm-6 gallery-grid gal_a gal_c">
+      <div class="gallery-single fix">
+        <img src="../../static/uploads/gallery_img-05.jpg" class="img-fluid" alt="Image">
+        <div class="img-overlay">
+          <a href="../../static/uploads/gallery_img-05.jpg " data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="fa fa-picture-o"></i></a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4 col-sm-6 gallery-grid gal_c gal_a">
+      <div class="gallery-single fix">
+        <img src=" ../../static/uploads/gallery_img-06.jpg " class="img-fluid" alt="Image">
+        <div class="img-overlay">
+          <a href="../../static/uploads/gallery_img-06.jpg " data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="fa fa-picture-o"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</div>
+{% endblock %}

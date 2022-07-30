@@ -1,0 +1,39 @@
+{% extends 'index2.html' %}
+
+{% block style %} 
+ <style>
+    .my-nav{
+      background-color:gray !important;
+    }
+ </style>
+{% endblock style %}
+
+
+{% block content %}
+<hr style="width: 80px ; color: blue; height: 100px;">
+   
+<div class="row" style="margin-right: -500px;margin-right: -229px;">
+    <div class="col-md-4 col-sm-6 col-lg-4 mt-4" >
+        <div class="post-box">
+            <div class="post-thumb">
+             {% if post.post_image 
+              <h5 class="card-title" style="margin: 5px;">Contact Our Theme</h5>
+              <img src="../../media/post/images3.jpg" style="margin: 50px;" />
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="home" class="btn btn-primary" style="margin: 5px;">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-lg-4 mt-4" >
+        <div class="post-box">
+            <div class="post-thumb">
+             <h5 class="card-title" style="margin: 5px;">Contact Our Theme</h5>
+             <img src="../../media/post/images2_SnS61OH.jpg" style="margin: 50px;" />
+             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+             <a href="home" class="btn btn-primary" style="margin: 5px;">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

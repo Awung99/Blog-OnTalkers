@@ -1,0 +1,184 @@
+{% extends 'index2.html' %}
+
+
+{% block style %} 
+ <style>
+    .my-nav{
+      background-color:gray !important;
+    }
+
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+
+    body{
+        background-color:#545454;
+        font-family: "Poppins", sans-serif;
+        font-weight: 300;
+  }
+
+  
+    .card{
+
+        width: 380px;
+        border: none;
+        border-radius: 15px;
+        padding: 8px;
+        background-color: #fff;
+        position: relative;
+        height: 370px;
+    }
+
+    .upper{
+
+        height: 100px;
+
+    }
+
+    .upper img{
+
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+    }
+
+    .user{
+        position: relative;
+    }
+
+    .profile img{
+
+        
+        height: 80px;
+        width: 80px;
+        margin-top:2px;
+
+       
+    }
+
+    .profile{
+
+        position: absolute;
+        top:-50px;
+        left: 38%;
+        height: 90px;
+        width: 90px;
+        border:3px solid #fff;
+
+        border-radius: 50%;
+
+    }
+       
+    .follow{
+
+        border-radius: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 35px;
+    }
+
+    .stats span{
+
+        font-size: 29px;
+    }
+
+
+
+ </style>
+{% endblock style %}
+{% block content %}
+<div class="container" style="margin: 98px;">
+    <div class="container d-flex justify-content-center align-items-center">
+             
+    
+        <div class="card">
+    
+         <div class="upper">
+    
+           <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid">
+           
+         </div>
+    
+         <div class="user text-align-items-center">
+    
+           <div class="profile">
+            {% if thisuser.bloggers.author %}
+             <img src="{{thisuser.bloggers.author.url}}" class="rounded-circle" width="80">
+             {% endif %}
+           </div>
+    
+         </div>
+    
+    
+         <div class="mt-5 text-center">
+    
+           <h4>{{thisuser.username}}</h4>
+           <h4>{{thisuser.profile}}</h4>
+           
+    
+    
+           <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+    
+             <div class="stats">
+               <h6 class="mb-0">Total Posts</h6>
+               <span>{{thisuser.bloggers.post_set.count}}</span>
+             </div>
+    
+    
+             <div class="stats">
+               <h6 class="mb-0">Total Likes</h6>
+               <span>{{t_likes}}</span>
+             </div>
+    
+    
+             <div class="stats">
+               <h6 class="mb-0">Total Comments</h6>
+               <span>{{thisuser.bloggers.comments_set.count}}</span>
+    
+             </div>
+             
+           </div>
+           
+         </div>
+          
+        </div>
+        
+      </div>
+      <h2 style="margin: 30px 450px; text-decoration:underline">Check your posts</h2>
+      <div class="row">
+        {% for post in thisuser.bloggers.post_set.all %}
+            <div class="col-md-4 col-sm-6 col-lg-4 mt-4" >
+                <div class="post-box">
+                    <div class="post-thumb">
+                        {% if post.post_image %}
+                        <img src="{{post.post_image.url}}" class="" alt="post-img" height="300"/>
+                        {% else %}
+                        <img src="https://image.shutterstock.com/image-vector/no-image-vector-isolated-on-260nw-1481369594.jpg" class="img-fluid" alt="post-img" />
+                        {% endif %}
+                        <div class="date">
+                            <span>25</span>
+                            <span>July</span>
+                        </div>
+                    </div>
+                    <div class="post-info">
+                        <h4>{{post.title}}  </h4>
+                        <ul>
+                            <li>by {{post.creator.user.username}} </li>
+                            <li>{{post.post_date}} </li>
+                            <li><a href="{% url 'detailpages' id=post.id %} ">Click For More Info<b><span>{{post.comments_set.count}}</span>
+                                Comments</b></a></li>
+                        </ul>
+                        
+                        <span>{{post.likes.count}}</span>
+                        <a href="{%  url 'likes'  id=post.id %}"><button type="button" class="btn btn-outline-danger"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+                        <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                        </svg></button></a>
+                        <p>{{post.text_post | truncatewords:8}} .</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<title>Blog Website</title>
+  <style>
+    body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f1f1f1;
+    }
+
+    .container{
+      width: 100%;
+      height:50vh;
+      background-image: url('../../media/post/citys.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding-left: 8%;
+      padding-right: 8%;
+      box-sizing: border-box;
+      
+
+    }
+
+    /* Header/Blog Title */
+    .header {
+      height: 15%;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .navbar{
+      text-align: center;
+      flex: 1;
+    }
+
+    .navbar a{
+      padding: 6px 20px;
+      text-decoration: none;
+      color: purple;
+      margin-left: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .content{
+      text-align: center;
+      margin-top: 1%;
+    }
+
+    .content h1{
+      color: blue;
+    }
+    /* Create two unequal columns that floats next to each other */
+    /* Left column */
+    .leftcolumn {
+      float: left;
+      width: 70%;
+    }
+
+    /* Right column */
+    .rightcolumn {
+      float: left;
+      width: 25%;
+      padding-left: 20px;
+    }
+
+    /* Fake image */
+    .fakeimg {
+      background-color: #aaa;
+      width: 100%;
+      padding: 20px;
+    }
+
+    /* Add a card effect for articles */
+    .card {
+      background-color:white;
+      padding: 2px;
+      margin-top: 20px;
+      
+    }
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    /* Footer */
+    .footer {
+      background-image: url('../../media/post/cities3.jpg');
+      padding: 20px;
+      text-align: center;
+      
+      margin-top: 20px;
+    }
+
+    /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 800px) {
+      .leftcolumn, .rightcolumn {
+        width: 100%;
+        padding: 0;
+      }
+    }
+
+
+
+    h2{
+      color: orange;
+      
+    }
+    .logo{
+      cursor: pointer;
+    width: 50px;
+    }
+
+
+
+
+
+
+
+
+
+  </style>
+</head>
+<body> 
+  <div class="container">
+    <div class="header">
+      <img src="../../media/blogger/logo.webp" class="logo">
+      <div class="navbar">
+        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+        <a class="nav-link" href="{% url 'about' %}">About</a>
+        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link" href="{% url 'center' %}">Help Center</a>
+        {% if user.is_authenticated %}
+        <a class="nav-link" href="{% url 'form' %}"><i class="fa fa-globe fa-3x"></i>Make a post</a>
+        <a class="nav-link" href="#">Welcome {{ user.username}}</a>
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+        <a class="nav-link" href="{% url 'register' %}">Register</a>
+        {% endif %}
+      </div>
+      <div class="content">
+        <h1>Talkers</h1>
+      </div>
+    </div>
+  </div>
+      <div class="row">
+        <div class="leftcolumn" >
+          {% for post in posts %}
+          <div class="card">
+            <h2> {{post.title}} </h2>
+            <h5>Title description, {{post.post_date}}</h5>
+            <div style="height: 100%; width: 100%;">
+              {% if post.post_image %}
+              <img src="{{post.post_image.url}}" style=" height: 100%; width: 100%;">
+              {% endif %}
+            </div>
+            {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'comments' id=post.id %}">
+            {% csrf_token %}
+            <input type="text" name="comment" placeholder="Comments">
+            {% for comment in post.comments_set.all %}
+            <div>
+              <span> <img src=" {{comment.creator.blogger.url}}  " class="rounded-circle" style="width: 0%;" alt="">{{comment.creator}} : {{comment.coment_text}}  </span>
+            </div>
+            {% endfor %}
+           <span>{{post.comments_set.count}}</span>
+            <button type="submit" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+              <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+            </svg></button>
+           <span>{{post.likes.count}}</span>
+            <a href="{%  url 'likes'  id=post.id %}"><button type="button"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+              <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+            </svg></button></a>
+           
+          </form>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="rightcolumn">
+          <div class="card">
+            <h2>{{user.username}}</h2>
+            <h5>About Blogger, {{post.post_date}}</h5>
+            {% if user.bloggers.author %}
+            <img src="{{user.bloggers.author.url}}" style="height:320px; width: 100%;">
+            {% endif %}
+            <p>some text...</p>
+          </div>
+          <div class="card">
+            <h2>{{user.username}}</h2>
+            <h5>Blogger Bio, {{post.post_date}}</h5>
+            {% if user.bloggers.author %}
+            <img src="{{user.bloggers.author.url}}" style="height:320px; width: 100%;">
+            {% endif %}
+            <p>some text...</p>
+          </div>
+        </div>
+      <div class="footer">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Contact Our Theme</h5>
+                <img src="../../media/post/images3.jpg" style="border-radius: 50%" />
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Contact Our Theme</h5>
+                <img src="../../media/post/images2_SnS61OH.jpg" style="border-radius: 50%" />
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+</body>
+
